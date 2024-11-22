@@ -20,7 +20,10 @@ const NoteCard = ({
           <span className="text-xs text-slate-500">{date}</span>
         </div>
 
-        <MdOutlinePushPin className={`icon-btn ${isPinned ? "text-primary" : "text-slate-300"}`} onClick={onPinNote} />
+        <MdOutlinePushPin
+          className={`icon-btn ${isPinned ? "text-primary" : "text-slate-300"}`}
+          onClick={onPinNote}
+        />
       </div>
 
       <p className="text-xs text-slate-600 mt-2">{content?.slice(0, 60)}</p>
@@ -32,9 +35,11 @@ const NoteCard = ({
             className="icon-btn hover:text-green-600"
             onClick={onEdit}
           />
-          <MdDelete className="icon-btn hover:text-red-500" onClick={onDelete}/>
+          <MdDelete
+            className="icon-btn hover:text-red-500"
+            onClick={onDelete}
+          />
         </div>
-          
       </div>
     </div>
   );
