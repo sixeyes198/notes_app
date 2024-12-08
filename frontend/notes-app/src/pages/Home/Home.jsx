@@ -48,10 +48,16 @@ const Home = () => {
             backgroundColor: "rgba(0,0,0,0.2)",
           },
         }}
-        contentLabel=""
+        contentLabel="Add/Edit Notes"
         className="w-full max-w-3xl max-h-[75v] bg-white rounded-lg mx-auto mt-14 p-6 overflow-y-auto backdrop-blur-sm transition-all shadow-lg"
       >
-        <AddEditNotes />
+        <AddEditNotes
+          type={openAddEditModal.type}
+          noteData={openAddEditModal.data}
+          onClose={() => {
+            setAddEditModal({ isShown: false, type: "add", data: null });
+          }}
+        />
       </Modal>
     </>
   );
