@@ -1,35 +1,61 @@
 import React, { useState } from "react";
 import Navbar from "../../components/Navbar/Navbar";
 import PasswordInput from "../../components/Input/PasswordInput";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { validateEmail } from "../../utils/helper";
+import axiosInstance from "../../utils/axiosInstance";
 
 const SignUp = () => {
-  const [name, setName] = useState("");
+  const [fullName, setFullName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState(null);
 
+  const navigate = useNavigate();
+
   const handleSignUp = async (e) => {
     e.preventDefault();
 
-    if (!name){
+    if (!fullName) {
       setError("Please enter your name");
-      return
+      return;
     }
 
-    if (!validateEmail(email)){
-      setError("Please enter a valid email address.")
-      return 
+    if (!validateEmail(email)) {
+      setError("Please enter a valid email address.");
+      return;
     }
 
-    if (!password){
-      setError("please enter the password")
-      return 
+    if (!password) {
+      setError("please enter the password");
+      return;
     }
-    setError("")
+    setError("");
 
     // SignUp API Call
+    try {
+      const response = await axiosInstance.post("/create-account", {
+        fullName: fullName,
+        email: email,
+        password: password,
+      });
+      console.log("server response", response.data);
+
+      if (response.data && response.data.accessToken) {
+        localStorage.setItem("token", response.data.accessToken);
+        navigate("/dashboard");
+      }
+    } catch (error) {
+      if (
+        error.response &&
+        error.response.data &&
+        error.response.data.message
+      ) {
+        setError(error.response.data.message);
+      } else {
+        setError("An unexcpected error occurred. Please try again.");
+      }
+    }
   };
 
   return (
@@ -45,8 +71,8 @@ const SignUp = () => {
               type="text"
               placeholder="Name"
               className="input-box"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
+              value={fullName}
+              onChange={(e) => setFullName(e.target.value)}
             />
 
             <input
@@ -65,11 +91,11 @@ const SignUp = () => {
             {error && <p className="text-red-500 text-xs pb-1">{error}</p>}
 
             <button type="submit" className="btn-primary">
-              Create Account 
+              Create Account
             </button>
 
             <p className="text-sm text-center mt-4">
-             Already have an account?{" "}
+              Already have an account?{" "}
               <Link to="/login" className="font-medium text-primary underline">
                 Login
               </Link>
