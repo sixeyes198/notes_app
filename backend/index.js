@@ -1,5 +1,5 @@
 require("dotenv").config();
-const config = require("./config.json");
+// const config = require("./config.json");
 const mongoose = require("mongoose");
 const path = require("path");
 // mongoose connection
@@ -324,6 +324,7 @@ app.get("/search-notes/", authenticateToken, async (req, res) => {
 
 
 app.use(express.static(path.join(__dirname, "../frontend/notes-app/build")));
+
 app.get("*", (req, res) => {
   res.sendFile(
     path.resolve(__dirname, "../frontend/notes-app/build", "index.html")
@@ -331,7 +332,7 @@ app.get("*", (req, res) => {
 });
 
 app.listen(3000, () => {
-  console.log("Server running on port 3000");
+  console.log(`Server running on ${3000}`);
 });
 
 
