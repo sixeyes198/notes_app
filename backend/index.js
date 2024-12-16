@@ -323,11 +323,12 @@ app.get("/search-notes/", authenticateToken, async (req, res) => {
 });
 
 
-app.use(express.static(path.join(__dirname, "../frontend/notes-app/build")));
+
+app.use(express.static(path.join(__dirname, "../frontend/notes-app/dist")));
 
 app.get("*", (req, res) => {
   res.sendFile(
-    path.resolve(__dirname, "../frontend/notes-app/build", "index.html")
+    path.resolve(__dirname, "../frontend/notes-app", "dist", "index.html")
   );
 });
 
