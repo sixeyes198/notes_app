@@ -15,6 +15,10 @@ const routes = (
 );
 
 const App = () => {
-  return <>{routes}</>;
+  return (
+  <>
+  {routes}
+  </>
+  );
 };
 export default App;
