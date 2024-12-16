@@ -2,15 +2,7 @@ require("dotenv").config();
 const config = require("./config.json");
 const mongoose = require("mongoose");
 
-// mongoose connection
-// mongoose
-//   .connect(config.connectionString)
-//   .then(() => {
-//     console.log("Connected to MongoDB");
-//   })
-//   .catch((err) => {
-//     console.log("Error connecting to MongoDB");
-//   });
+
 const connectionString = process.env.MONGO_URI || config.connectionString;
 mongoose
   .connect(connectionString)
