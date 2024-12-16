@@ -326,4 +326,9 @@ app.listen(3000, () => {
   console.log("Server running on port 3000");
 });
 
+app.use(express.static(path.join(__dirname, "./frontend/notes-app")));
+app.get("*", (req, res) => {
+  res.sendFile(path.resolve(__dirname, "./frontend/notes-app", "index.html"));
+});
+
 module.exports = app;
