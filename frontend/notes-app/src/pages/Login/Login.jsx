@@ -27,11 +27,16 @@ const Login = () => {
 
     setError("");
     //Login API Call
+
+    console.log("API Base URL:", axiosInstance.defaults.baseURL);
+
     try {
       const response = await axiosInstance.post("/login", {
         email: email,
         password: password,
       });
+
+      console.log("Response received:", response.data);
 
       //Handling successful login response
       if (response.data && response.data.accessToken) {
@@ -39,6 +44,8 @@ const Login = () => {
         navigate("/dashboard");
       }
     } catch (error) {
+      console.error("Login error:", error);
+
       //Handling Login error
       if (
         error.response &&
