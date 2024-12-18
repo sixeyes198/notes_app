@@ -36,7 +36,8 @@ const authenticateToken = require("./utilities");
 app.use(express.json());
 app.use(
   cors({
-    origin: "*",
+    origin: "https://notes-app-90x5.onrender.com",
+    credentials: true,
   })
 );
 
