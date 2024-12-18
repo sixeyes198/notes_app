@@ -40,9 +40,9 @@ app.use(
   })
 );
 
-app.get("/", (req, res) => {
-  res.json({ data: "Hello from sever" });
-});
+// app.get("/", (req, res) => {
+//   res.json({ data: "Hello from sever" });
+// });
 
 // Create Account
 app.post("/create-account", async (req, res) => {
