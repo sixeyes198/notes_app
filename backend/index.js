@@ -40,9 +40,9 @@ app.use(
   })
 );
 
-// app.get("/", (req, res) => {
-//   res.json({ data: "Hey" });
-// });
+app.get("/", (req, res) => {
+  res.json({ data: "Hello from sever" });
+});
 
 // Create Account
 app.post("/create-account", async (req, res) => {
@@ -322,8 +322,6 @@ app.get("/search-notes/", authenticateToken, async (req, res) => {
   }
 });
 
-
-
 app.use(express.static(path.join(__dirname, "../frontend/notes-app/dist")));
 
 app.get("*", (req, res) => {
@@ -335,6 +333,5 @@ app.get("*", (req, res) => {
 app.listen(3000, () => {
   console.log(`Server running on ${3000}`);
 });
-
 
 module.exports = app;
